@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntuneRapidoLiens — Ressources Microsoft Intune en Français</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#050d1a; --bg2:#091525; --bg3:#0d1f35; --bg4:#111e30;
+  --ms:#0078d4; --msl:#50a8ff; --msll:#a8d4ff;
+  --win:#0078d4; --and:#3ddc84; --mac:#a2aaad; --ios:#007aff;
+  --res:#ff9f00; --comp:#e74856; --aut:#8764b8; --ca:#00d4ff;
+  --tx:#e8f4ff; --dim:rgba(232,244,255,.55); --dim2:rgba(232,244,255,.3);
+  --gr:rgba(0,120,212,.06); --bdr:rgba(255,255,255,.07);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--tx);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--gr) 1px,transparent 1px),linear-gradient(90deg,var(--gr) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{display:none;position:relative;z-index:1;min-height:100vh;padding-bottom:80px;}
+.page.active{display:block;animation:pgIn .35s ease both;}
+@keyframes pgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.4)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes countUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---- TOPNAV ---- */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(5,13,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);}
+.navinner{max-width:1320px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0;height:58px;}
+.nlogo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;margin-right:24px;}
+.nlogoi{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--ms),var(--ca));display:flex;align-items:center;justify-content:center;font-size:15px;}
+.nlogot{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;background:linear-gradient(90deg,#fff,var(--msl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nlogos{font-size:9px;color:var(--dim2);font-family:'Share Tech Mono',monospace;letter-spacing:2px;margin-top:-2px;}
+.navlinks{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.navlinks::-webkit-scrollbar{display:none;}
+.nl{padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--dim);transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;border:1px solid transparent;}
+.nl:hover{background:rgba(255,255,255,.05);color:var(--tx);}
+.nl.active{background:rgba(0,120,212,.12);border-color:rgba(0,120,212,.25);color:var(--msl);}
+.nl .dot{width:6px;height:6px;border-radius:50%;}
+.nsearch{margin-left:auto;flex-shrink:0;}
+.srchw{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:8px;padding:6px 12px;width:220px;transition:all .3s;}
+.srchw:focus-within{border-color:rgba(0,120,212,.4);background:rgba(0,120,212,.06);}
+.srchw input{background:none;border:none;outline:none;color:var(--tx);font-family:'Rajdhani',sans-serif;font-size:13px;width:100%;font-weight:500;}
+.srchw input::placeholder{color:var(--dim2);}
+.srchw svg{width:14px;height:14px;flex-shrink:0;color:var(--dim2);}
+
+/* ---- WRAP ---- */
+.wrap{max-width:1320px;margin:0 auto;padding:40px 24px;}
+
+/* ---- BACK BTN ---- */
+.back{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:100px;padding:8px 18px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;transition:all .25s;margin-bottom:36px;}
+.back:hover{background:rgba(255,255,255,.08);color:var(--tx);transform:translateX(-3px);}
+.back svg{width:14px;height:14px;}
+
+/* ---- SECTION HERO ---- */
+.hero{padding:48px 0 40px;border-bottom:1px solid var(--bdr);margin-bottom:44px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;right:-60px;top:-80px;width:400px;height:400px;border-radius:50%;pointer-events:none;}
+.htag{display:inline-flex;align-items:center;gap:8px;border-radius:100px;padding:5px 14px 5px 10px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;border:1px solid;}
+.htag .dot{width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite;}
+.htitle{font-family:'Orbitron',sans-serif;font-size:clamp(24px,3.5vw,46px);font-weight:900;line-height:1.1;margin-bottom:14px;}
+.hsub{font-size:15px;color:var(--dim);max-width:680px;line-height:1.65;}
+.hchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.chip{padding:3px 10px;border-radius:100px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;border:1px solid;white-space:nowrap;}
+
+/* ---- LINK CARDS ---- */
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--bdr);}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:36px;}
+.card{background:var(--bg2);border-radius:12px;border:1px solid var(--bdr);overflow:hidden;transition:all .25s cubic-bezier(.4,0,.2,1);cursor:pointer;text-decoration:none;display:block;position:relative;}
+.card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.15);box-shadow:0 12px 32px rgba(0,0,0,.4);}
+.card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;}
+.card:hover::before{opacity:1;}
+.card-top{padding:16px 18px 12px;}
+.card-ic{font-size:22px;margin-bottom:8px;line-height:1;}
+.card-ty{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.card-title{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:6px;}
+.card-desc{font-size:12px;color:var(--dim);line-height:1.5;}
+.card-ft{padding:10px 18px;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;}
+.card-src{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim2);letter-spacing:1px;}
+.card-arr{font-size:12px;color:var(--dim2);transition:transform .2s;}
+.card:hover .card-arr{transform:translateX(3px);color:var(--tx);}
+
+/* Platform specific card colors */
+.card.win:hover{border-color:rgba(0,120,212,.4);box-shadow:0 12px 32px rgba(0,120,212,.15);}
+.card.win::before{background:linear-gradient(135deg,rgba(0,120,212,.04),transparent);}
+.card.win .card-ty{color:var(--win);}
+.card.and:hover{border-color:rgba(61,220,132,.4);box-shadow:0 12px 32px rgba(61,220,132,.12);}
+.card.and::before{background:linear-gradient(135deg,rgba(61,220,132,.04),transparent);}
+.card.and .card-ty{color:var(--and);}
+.card.mac:hover{border-color:rgba(162,170,173,.4);box-shadow:0 12px 32px rgba(162,170,173,.1);}
+.card.mac::before{background:linear-gradient(135deg,rgba(162,170,173,.04),transparent);}
+.card.mac .card-ty{color:var(--mac);}
+.card.ios:hover{border-color:rgba(0,122,255,.4);box-shadow:0 12px 32px rgba(0,122,255,.12);}
+.card.ios::before{background:linear-gradient(135deg,rgba(0,122,255,.04),transparent);}
+.card.ios .card-ty{color:var(--ios);}
+.card.res:hover{border-color:rgba(255,159,0,.4);box-shadow:0 12px 32px rgba(255,159,0,.12);}
+.card.res::before{background:linear-gradient(135deg,rgba(255,159,0,.04),transparent);}
+.card.res .card-ty{color:var(--res);}
+.card.aut:hover{border-color:rgba(135,100,184,.4);box-shadow:0 12px 32px rgba(135,100,184,.12);}
+.card.aut::before{background:linear-gradient(135deg,rgba(135,100,184,.04),transparent);}
+.card.aut .card-ty{color:var(--aut);}
+.card.ca:hover{border-color:rgba(0,212,255,.4);box-shadow:0 12px 32px rgba(0,212,255,.12);}
+.card.ca::before{background:linear-gradient(135deg,rgba(0,212,255,.04),transparent);}
+.card.ca .card-ty{color:var(--ca);}
+.card.comp:hover{border-color:rgba(231,72,86,.4);box-shadow:0 12px 32px rgba(231,72,86,.12);}
+.card.comp::before{background:linear-gradient(135deg,rgba(231,72,86,.04),transparent);}
+.card.comp .card-ty{color:var(--comp);}
+
+.card.featured{grid-column:span 2;}
+.card.featured .card-title{font-size:16px;}
+@media(max-width:700px){.card.featured{grid-column:span 1;}}
+
+/* ---- HUB SPECIFIC ---- */
+.hub-hero{padding:64px 0 52px;text-align:center;position:relative;}
+.hub-badge{display:inline-flex;align-items:center;gap:9px;background:rgba(0,120,212,.12);border:1px solid rgba(0,120,212,.3);border-radius:100px;padding:6px 18px 6px 12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ca);letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;}
+.hub-dot{width:8px;height:8px;border-radius:50%;background:var(--ca);box-shadow:0 0 10px var(--ca);animation:pulse 2s infinite;}
+.hub-title{font-family:'Orbitron',sans-serif;font-size:clamp(28px,5vw,58px);font-weight:900;line-height:1.05;letter-spacing:-1px;background:linear-gradient(135deg,#fff 0%,var(--msl) 40%,var(--ca) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;}
+.hub-sub{font-size:17px;color:var(--dim);max-width:620px;margin:0 auto 36px;line-height:1.65;}
+.hub-search{display:flex;align-items:center;gap:0;max-width:520px;margin:0 auto 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;transition:all .3s;}
+.hub-search:focus-within{border-color:rgba(0,120,212,.5);background:rgba(0,120,212,.06);box-shadow:0 0 0 3px rgba(0,120,212,.1);}
+.hub-search input{flex:1;background:none;border:none;outline:none;padding:14px 18px;color:var(--tx);font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:500;}
+.hub-search input::placeholder{color:var(--dim2);}
+.hub-search button{background:linear-gradient(135deg,var(--ms),#005fa3);border:none;cursor:pointer;padding:0 20px;height:100%;color:#fff;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1.5px;display:flex;align-items:center;gap:6px;transition:opacity .2s;}
+.hub-search button:hover{opacity:.9;}
+.hub-hint{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim2);letter-spacing:1px;text-align:center;margin-bottom:56px;}
+
+/* Platform grid */
+.plat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+.plat-card{border-radius:16px;padding:28px 24px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);border:1px solid;position:relative;overflow:hidden;}
+.plat-card::after{content:'EXPLORER →';position:absolute;bottom:14px;right:16px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;opacity:0;transition:opacity .25s;}
+.plat-card:hover::after{opacity:1;}
+.plat-card:hover{transform:translateY(-4px);}
+.plat-ic{font-size:38px;margin-bottom:14px;display:block;animation:float 4s ease-in-out infinite;}
+.plat-ic:nth-child(1){animation-delay:0s;}
+.plat-name{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.plat-desc{font-size:12px;line-height:1.5;}
+.plat-cnt{margin-top:14px;display:flex;align-items:center;gap:8px;}
+.plat-n{font-family:'Share Tech Mono',monospace;font-size:20px;font-weight:700;line-height:1;}
+.plat-l{font-size:10px;color:var(--dim2);}
+
+.pc-win{background:rgba(0,120,212,.06);border-color:rgba(0,120,212,.3);}
+.pc-win:hover{border-color:rgba(0,120,212,.6);box-shadow:0 16px 48px rgba(0,120,212,.2);}
+.pc-win .plat-name{color:var(--win);}
+.pc-win .plat-n{color:var(--win);}
+.pc-win::after{color:var(--win);}
+
+.pc-and{background:rgba(61,220,132,.06);border-color:rgba(61,220,132,.3);}
+.pc-and:hover{border-color:rgba(61,220,132,.6);box-shadow:0 16px 48px rgba(61,220,132,.18);}
+.pc-and .plat-name{color:var(--and);}
+.pc-and .plat-n{color:var(--and);}
+.pc-and::after{color:var(--and);}
+
+.pc-mac{background:rgba(162,170,173,.06);border-color:rgba(162,170,173,.25);}
+.pc-mac:hover{border-color:rgba(162,170,173,.5);box-shadow:0 16px 48px rgba(162,170,173,.12);}
+.pc-mac .plat-name{color:var(--mac);}
+.pc-mac .plat-n{color:var(--mac);}
+.pc-mac::after{color:var(--mac);}
+
+.pc-ios{background:rgba(0,122,255,.06);border-color:rgba(0,122,255,.3);}
+.pc-ios:hover{border-color:rgba(0,122,255,.6);box-shadow:0 16px 48px rgba(0,122,255,.18);}
+.pc-ios .plat-name{color:var(--ios);}
+.pc-ios .plat-n{color:var(--ios);}
+.pc-ios::after{color:var(--ios);}
+
+/* Quick access row */
+.qa-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:48px;}
+.qa-item{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:6px;}
+.qa-item:hover{background:rgba(255,255,255,.05);transform:translateY(-2px);}
+.qa-ic{font-size:22px;}
+.qa-t{font-size:12px;font-weight:700;}
+.qa-d{font-size:10px;color:var(--dim2);}
+.qa-item.aut:hover{border-color:rgba(135,100,184,.4);}.qa-item.aut .qa-t{color:var(--aut);}
+.qa-item.comp:hover{border-color:rgba(231,72,86,.4);}.qa-item.comp .qa-t{color:var(--comp);}
+.qa-item.ca:hover{border-color:rgba(0,212,255,.4);}.qa-item.ca .qa-t{color:var(--ca);}
+.qa-item.res:hover{border-color:rgba(255,159,0,.4);}.qa-item.res .qa-t{color:var(--res);}
+.qa-item.win2:hover{border-color:rgba(0,120,212,.4);}.qa-item.win2 .qa-t{color:var(--win);}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:48px;}
+.stat{background:var(--bg2);border-radius:10px;border:1px solid var(--bdr);padding:20px;text-align:center;}
+.stat-n{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;color:var(--msl);line-height:1;}
+.stat-l{font-size:11px;color:var(--dim);margin-top:6px;}
+
+/* Featured banner */
+.fban{background:linear-gradient(135deg,rgba(0,120,212,.12),rgba(0,212,255,.06));border:1px solid rgba(0,120,212,.25);border-radius:14px;padding:28px 32px;margin-bottom:48px;display:flex;align-items:center;gap:24px;}
+.fban-ic{font-size:48px;flex-shrink:0;animation:float 3s ease-in-out infinite;}
+.fban-t{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--msl);margin-bottom:8px;}
+.fban-d{font-size:14px;color:var(--dim);line-height:1.6;}
+.fban-btn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:var(--ms);border:none;border-radius:8px;padding:10px 20px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1.5px;cursor:pointer;transition:all .25s;}
+.fban-btn:hover{background:#005fa3;transform:translateY(-1px);}
+
+/* ---- TOOLS GRID ---- */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:36px;}
+.tool{background:var(--bg2);border-radius:10px;border:1px solid var(--bdr);padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .25s;text-decoration:none;}
+.tool:hover{background:rgba(255,255,255,.05);transform:translateY(-2px);}
+.tool-ic{font-size:26px;flex-shrink:0;}
+.tool-name{font-size:13px;font-weight:700;}
+.tool-desc{font-size:11px;color:var(--dim);margin-top:2px;}
+
+/* ---- BLOG/COMMUNITY ---- */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:36px;}
+.blog-card{background:var(--bg2);border-radius:12px;border:1px solid var(--bdr);padding:20px;cursor:pointer;transition:all .25s;text-decoration:none;display:block;}
+.blog-card:hover{border-color:rgba(255,159,0,.35);transform:translateY(-3px);box-shadow:0 12px 32px rgba(255,159,0,.1);}
+.blog-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--bg3);border:1px solid var(--bdr);}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.blog-who{font-size:12px;font-weight:700;color:var(--msl);}
+.blog-when{font-size:10px;color:var(--dim2);font-family:'Share Tech Mono',monospace;}
+.blog-title{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px;}
+.blog-desc{font-size:12px;color:var(--dim);line-height:1.5;}
+.blog-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.blog-tag{padding:2px 8px;border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--dim);}
+
+/* ---- TRAINING ---- */
+.train-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:36px;}
+.train{background:var(--bg2);border-radius:12px;border:1px solid var(--bdr);overflow:hidden;cursor:pointer;transition:all .25s;text-decoration:none;display:block;}
+.train:hover{transform:translateY(-3px);}
+.train-top{height:6px;}
+.train-body{padding:18px;}
+.train-src{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.train-title{font-size:13px;font-weight:700;margin-bottom:6px;line-height:1.4;}
+.train-meta{font-size:11px;color:var(--dim);}
+.train-ft{padding:10px 18px;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:8px;}
+.train-lv{font-size:10px;padding:2px 8px;border-radius:100px;font-family:'Share Tech Mono',monospace;font-weight:600;}
+
+/* ---- SEARCH RESULTS ---- */
+.search-results{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;overflow:hidden;display:none;}
+.search-results.show{display:block;}
+.sr-head{padding:12px 18px;background:rgba(0,120,212,.08);border-bottom:1px solid var(--bdr);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--msl);}
+.sr-item{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:background .2s;text-decoration:none;}
+.sr-item:last-child{border-bottom:none;}
+.sr-item:hover{background:rgba(255,255,255,.03);}
+.sr-ic{font-size:18px;flex-shrink:0;margin-top:1px;}
+.sr-plat{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
+.sr-t{font-size:13px;font-weight:700;}
+.sr-d{font-size:11px;color:var(--dim);margin-top:2px;}
+
+/* ---- DIVIDER ---- */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,120,212,.3),transparent);margin:36px 0;}
+
+/* No results */
+.no-results{text-align:center;padding:48px;color:var(--dim);}
+.no-results-ic{font-size:48px;margin-bottom:12px;display:block;}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="navinner">
+    <div class="nlogo" onclick="goTo('hub')">
+      <div class="nlogoi">🛡️</div>
+      <div>
+        <div class="nlogot">IntuneRapidoLiens</div>
+        <div class="nlogos">Ressources Microsoft Intune • FR</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <div class="nl active" id="nav-hub" onclick="goTo('hub')"><span class="dot" style="background:#50a8ff"></span>Accueil</div>
+      <div class="nl" id="nav-win" onclick="goTo('win')"><span class="dot" style="background:#0078d4"></span>Windows</div>
+      <div class="nl" id="nav-and" onclick="goTo('and')"><span class="dot" style="background:#3ddc84"></span>Android</div>
+      <div class="nl" id="nav-mac" onclick="goTo('mac')"><span class="dot" style="background:#a2aaad"></span>macOS</div>
+      <div class="nl" id="nav-ios" onclick="goTo('ios')"><span class="dot" style="background:#007aff"></span>iOS / iPadOS</div>
+      <div class="nl" id="nav-aut" onclick="goTo('aut')"><span class="dot" style="background:#8764b8"></span>Autopilot</div>
+      <div class="nl" id="nav-comp" onclick="goTo('comp')"><span class="dot" style="background:#e74856"></span>Conformité</div>
+      <div class="nl" id="nav-ca" onclick="goTo('ca')"><span class="dot" style="background:#00d4ff"></span>Accès Conditionnel</div>
+      <div class="nl" id="nav-res" onclick="goTo('res')"><span class="dot" style="background:#ff9f00"></span>Ressources</div>
+    </div>
+    <div class="nsearch">
+      <div class="srchw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Chercher une ressource..." id="navSearch" oninput="liveSearch(this.value)" onkeydown="if(event.key==='Enter')doSearch()">
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== HUB ======== -->
+<div id="page-hub" class="page active">
+  <div class="wrap">
+    <div class="hub-hero">
+      <div class="hub-badge"><div class="hub-dot"></div>Microsoft Endpoint Manager · Communauté FR</div>
+      <h1 class="hub-title">IntuneRapidoLiens</h1>
+      <p class="hub-sub">Votre portail de référence rapide pour Microsoft Intune en français. Guides visuels, liens officiels Microsoft Docs, outils et ressources communautaires.</p>
+      <div class="hub-search">
+        <input type="text" placeholder="Rechercher : Autopilot, conformité, Settings Catalog..." id="hubSearch" oninput="liveSearch(this.value)">
+        <button onclick="doSearch()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>CHERCHER</button>
+      </div>
+      <div class="hub-hint">Appuyez sur une plateforme ou cherchez directement une ressource</div>
+
+      <!-- Search results -->
+      <div id="search-panel" class="search-results" style="max-width:760px;margin:0 auto;text-align:left;"></div>
+    </div>
+
+    <!-- Platform grid -->
+    <div class="plat-grid">
+      <div class="plat-card pc-win" onclick="goTo('win')">
+        <span class="plat-ic">🪟</span>
+        <div class="plat-name">Windows</div>
+        <div class="plat-desc" style="color:rgba(232,244,255,.5)">Autopilot, Settings Catalog, Update Rings, Remédiation, Sécurité</div>
+        <div class="plat-cnt"><span class="plat-n">24</span><span class="plat-l">ressources</span></div>
+      </div>
+      <div class="plat-card pc-and" onclick="goTo('and')">
+        <span class="plat-ic">🤖</span>
+        <div class="plat-name">Android</div>
+        <div class="plat-desc" style="color:rgba(232,244,255,.5)">Android Enterprise, Work Profile, Kiosque, Play Managed, BYOD</div>
+        <div class="plat-cnt"><span class="plat-n">18</span><span class="plat-l">ressources</span></div>
+      </div>
+      <div class="plat-card pc-mac" onclick="goTo('mac')">
+        <span class="plat-ic">🍎</span>
+        <div class="plat-name">macOS</div>
+        <div class="plat-desc" style="color:rgba(232,244,255,.5)">ABM, FileVault, Profils de configuration, SCEP, scripts Shell</div>
+        <div class="plat-cnt"><span class="plat-n">14</span><span class="plat-l">ressources</span></div>
+      </div>
+      <div class="plat-card pc-ios" onclick="goTo('ios')">
+        <span class="plat-ic">📱</span>
+        <div class="plat-name">iOS / iPadOS</div>
+        <div class="plat-desc" style="color:rgba(232,244,255,.5)">ADE, VPP, User Enrollment, MAM, Accès conditionnel mobile</div>
+        <div class="plat-cnt"><span class="plat-n">16</span><span class="plat-l">ressources</span></div>
+      </div>
+    </div>
+
+    <!-- Quick access -->
+    <div class="sec-title">// Accès Rapide — Collections Thématiques</div>
+    <div class="qa-row">
+      <div class="qa-item aut" onclick="goTo('aut')"><div class="qa-ic">🚀</div><div class="qa-t">Autopilot</div><div class="qa-d">Déploiement zéro-touch</div></div>
+      <div class="qa-item comp" onclick="goTo('comp')"><div class="qa-ic">✅</div><div class="qa-t">Conformité</div><div class="qa-d">Policies & Reporting</div></div>
+      <div class="qa-item ca" onclick="goTo('ca')"><div class="qa-ic">🔐</div><div class="qa-t">Accès Conditionnel</div><div class="qa-d">Entra ID & Zero Trust</div></div>
+      <div class="qa-item res" onclick="goTo('res')"><div class="qa-ic">🌐</div><div class="qa-t">Communauté</div><div class="qa-d">Blogs, outils & formations</div></div>
+      <div class="qa-item win2" onclick="goTo('win')"><div class="qa-ic">⚙️</div><div class="qa-t">Settings Catalog</div><div class="qa-d">15 000+ paramètres</div></div>
+    </div>
+
+    <!-- Featured -->
+    <div class="fban">
+      <div class="fban-ic">📋</div>
+      <div>
+        <div class="fban-t">Microsoft Intune — Documentation officielle FR</div>
+        <div class="fban-d">Accédez directement au centre de documentation Microsoft Learn en français. Guides de démarrage, référence des paramètres, tutoriels et meilleures pratiques pour l'ensemble des plateformes gérées par Intune.</div>
+        <a href="https://learn.microsoft.com/fr-fr/intune/" target="_blank" rel="noopener" style="text-decoration:none"><button class="fban-btn">Ouvrir Microsoft Learn FR →</button></a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sec-title">// Chiffres Clés — Microsoft Intune 2025</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">15k+</div><div class="stat-l">Paramètres disponibles dans le Settings Catalog</div></div>
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">Plateformes gérées (Win · And · iOS · macOS · Linux)</div></div>
+      <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Applications tierces dans Enterprise App Catalog</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Cloud natif — Aucune infra on-premise requise</div></div>
+    </div>
+
+    <!-- Top links on hub -->
+    <div class="sec-title">// Liens Essentiels — Portails &amp; Outils</div>
+    <div class="tool-grid">
+      <a href="https://endpoint.microsoft.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🏢</div><div><div class="tool-name">Centre d'Administration Intune</div><div class="tool-desc">endpoint.microsoft.com</div></div></a>
+      <a href="https://entra.microsoft.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🆔</div><div><div class="tool-name">Portail Entra ID</div><div class="tool-desc">entra.microsoft.com</div></div></a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/whats-new" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🆕</div><div><div class="tool-name">Nouveautés Intune</div><div class="tool-desc">Mises à jour mensuelles</div></div></a>
+      <a href="https://developer.microsoft.com/en-us/graph/graph-explorer" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🔭</div><div><div class="tool-name">Graph Explorer</div><div class="tool-desc">API Microsoft Graph</div></div></a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/intune-service-roadmap" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🗺️</div><div><div class="tool-name">Roadmap Intune</div><div class="tool-desc">Fonctionnalités à venir</div></div></a>
+      <a href="https://techcommunity.microsoft.com/category/intune" target="_blank" rel="noopener" class="tool"><div class="tool-ic">💬</div><div><div class="tool-name">Tech Community</div><div class="tool-desc">Forum Microsoft officiel</div></div></a>
+    </div>
+  </div>
+</div>
+
+<!-- ======== WINDOWS ======== -->
+<div id="page-win" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(0,120,212,.1);border-color:rgba(0,120,212,.35);color:var(--win)"><div class="dot" style="background:var(--win);box-shadow:0 0 8px var(--win)"></div>Plateforme Windows</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,var(--msl),var(--win));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ressources Windows</h1>
+      <p class="hsub">Tous les liens essentiels pour gérer les appareils Windows avec Microsoft Intune : enrôlement, configuration, sécurité, mises à jour et remédiation.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">AUTOPILOT</span>
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">SETTINGS CATALOG</span>
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">BITLOCKER</span>
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">DEFENDER</span>
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">UPDATE RINGS</span>
+        <span class="chip" style="background:rgba(0,120,212,.1);color:var(--win);border-color:rgba(0,120,212,.3)">REMÉDIATION</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Documentation Officielle — Enrôlement Windows</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/windows-autopilot" target="_blank" rel="noopener" class="card win featured">
+        <div class="card-top"><div class="card-ic">🚀</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Windows Autopilot — Guide Complet</div><div class="card-desc">Déploiement zéro-touch pour Windows 10/11. Modes User-Driven, Self-Deploying, Pre-Provisioning (White Glove) et Driven pour les HoloLens. Intègre Enrollment Status Page (ESP).</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/windows-enrollment-methods" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📋</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Méthodes d'enrôlement Windows</div><div class="card-desc">Comparatif complet : Autopilot, GPO, SCCM co-gestion, Bulk enrollment, Azure AD Join.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/windows-enrollment-status" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">⏳</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Page d'état d'enrôlement (ESP)</div><div class="card-desc">Configuration de la page de suivi pendant le déploiement Autopilot. Blocage, timeout et catégories d'applications.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Configuration — Settings Catalog &amp; Profils</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/settings-catalog" target="_blank" rel="noopener" class="card win featured">
+        <div class="card-top"><div class="card-ic">⚙️</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">Settings Catalog — Référence Complète</div><div class="card-desc">15 000+ paramètres Windows disponibles dans le catalogue. Remplace les GPO on-premise. Créez des politiques granulaires pour Edge, Defender, Windows Update, et bien plus.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/administrative-templates-windows" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📝</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">Templates ADMX dans Intune</div><div class="card-desc">Utiliser les modèles d'administration (ADMX) pour configurer des paramètres Office, Edge et Windows sans Settings Catalog.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/delivery-optimization-windows" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📡</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">Delivery Optimization</div><div class="card-desc">Réduire la consommation bande passante réseau lors des mises à jour. Configuration du cache P2P et des limites de téléchargement.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Sécurité — BitLocker, Defender &amp; LAPS</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/encrypt-devices" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🔒</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Chiffrement BitLocker via Intune</div><div class="card-desc">Activer le chiffrement silencieux, sauvegarder les clés de récupération dans Entra ID et surveiller l'état de chiffrement du parc.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/advanced-threat-protection" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🛡️</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Microsoft Defender for Endpoint + Intune</div><div class="card-desc">Intégration MDE pour l'onboarding automatique, la gestion des règles ASR et la remontée de signaux de risque vers l'accès conditionnel.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/windows-laps-overview" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🔑</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Windows LAPS avec Intune</div><div class="card-desc">Local Administrator Password Solution — gestion automatique des mots de passe admin locaux avec rotation et sauvegarde dans Entra ID ou Active Directory.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/security-baselines" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📐</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Security Baselines Windows</div><div class="card-desc">Appliquer les paramètres de sécurité recommandés par Microsoft en un seul profil préconfiguré. Baselines MDM Security, Defender ATP et Edge.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Mises à Jour — Windows Update for Business</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/windows-update-for-business-configure" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🔄</div><div class="card-ty">Mises à Jour · Officiel</div><div class="card-title">Update Rings Windows 10/11</div><div class="card-desc">Créer des anneaux de mise à jour avec délais différenciés. Stratégie multi-rings (Pilot, Early Adopters, Production, Critique) pour déploiements progressifs.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/windows/deployment/windows-autopatch/overview/windows-autopatch-overview" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🤖</div><div class="card-ty">Mises à Jour · Officiel</div><div class="card-title">Windows Autopatch</div><div class="card-desc">Automatisation complète des mises à jour Windows, Microsoft 365 et Edge. Déploiement orchestré basé sur l'analyse des risques et la health du parc.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/windows-10-feature-updates" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🆙</div><div class="card-ty">Mises à Jour · Officiel</div><div class="card-title">Feature Updates — Windows 11</div><div class="card-desc">Contrôler la montée de version OS (ex : forcer Windows 11 23H2 ou 24H2) sur des groupes ciblés de machines avec rollout progressif.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Remédiation &amp; Scripts PowerShell</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/remediations" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">🔧</div><div class="card-ty">Remédiation · Officiel</div><div class="card-title">Remédiation Proactive (Endpoint Analytics)</div><div class="card-desc">Scripts de détection + correction automatique. Planification horaire, ciblage par groupe et rapport détaillé des appareils remédié.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/intune-management-extension" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📜</div><div class="card-ty">Scripts · Officiel</div><div class="card-title">Scripts PowerShell via Intune</div><div class="card-desc">Déployer des scripts .ps1 en contexte Système ou Utilisateur. Fréquence d'exécution, logs via IME et stratégies de retry en cas d'échec.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/endpoint-analytics-overview" target="_blank" rel="noopener" class="card win">
+        <div class="card-top"><div class="card-ic">📊</div><div class="card-ty">Analytics · Officiel</div><div class="card-title">Endpoint Analytics — Vue de Santé Parc</div><div class="card-desc">Scores de performance, temps de démarrage, crash reports, et Work From Anywhere. Tableaux de bord prêts à l'emploi pour les architectes Intune.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== ANDROID ======== -->
+<div id="page-and" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(61,220,132,.1);border-color:rgba(61,220,132,.35);color:var(--and)"><div class="dot" style="background:var(--and);box-shadow:0 0 8px var(--and)"></div>Plateforme Android</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#a8ffce,var(--and));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ressources Android Enterprise</h1>
+      <p class="hsub">Gérer les appareils Android avec Intune : Work Profile BYOD, Fully Managed Corporate, Dedicated Kiosk et Android Enterprise via Google Play Managed.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(61,220,132,.1);color:var(--and);border-color:rgba(61,220,132,.3)">WORK PROFILE</span>
+        <span class="chip" style="background:rgba(61,220,132,.1);color:var(--and);border-color:rgba(61,220,132,.3)">FULLY MANAGED</span>
+        <span class="chip" style="background:rgba(61,220,132,.1);color:var(--and);border-color:rgba(61,220,132,.3)">DEDICATED / KIOSQUE</span>
+        <span class="chip" style="background:rgba(61,220,132,.1);color:var(--and);border-color:rgba(61,220,132,.3)">ZERO-TOUCH</span>
+        <span class="chip" style="background:rgba(61,220,132,.1);color:var(--and);border-color:rgba(61,220,132,.3)">PLAY MANAGED</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Enrôlement Android Enterprise</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-enroll" target="_blank" rel="noopener" class="card and featured">
+        <div class="card-top"><div class="card-ic">🤖</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Vue d'ensemble — Android Enterprise dans Intune</div><div class="card-desc">Présentation des 4 modes : Work Profile (BYOD), Fully Managed (COBO), Dedicated (kiosque COSU) et Corporate-Owned Work Profile (COPE). Choix de la bonne méthode selon le contexte.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-work-profile-enroll" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">💼</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Work Profile — BYOD Android</div><div class="card-desc">Profil professionnel isolé sur appareil personnel. Apps perso invisibles depuis Intune. Wipe sélectif respectueux de la vie privée.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-fully-managed-enroll" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">🏢</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Fully Managed — Appareils Corporate</div><div class="card-desc">Contrôle total de l'appareil. Enrôlement via QR Code, NFC, token EMM ou Zero-Touch. Aucun compte Google perso requis.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-kiosk-enroll" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">📺</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Dedicated Devices — Mode Kiosque</div><div class="card-desc">Appareils à usage unique ou partagé. Configuration mono-app, multi-app ou navigation guidée. Idéal bornes, entrepôts, caisses.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Configuration &amp; Applications Android</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/apps-add-android-for-work" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">📦</div><div class="card-ty">Applications · Officiel</div><div class="card-title">Google Play Managed — Apps Android</div><div class="card-desc">Approuver et déployer des apps depuis le Play Store géré. Installation silencieuse sans interaction utilisateur sur appareils Enterprise.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/app-protection-policy" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">🛡️</div><div class="card-ty">MAM · Officiel</div><div class="card-title">Politiques de Protection des Applications (APP)</div><div class="card-desc">MAM sans MDM pour BYOD : bloquer copier-coller, forcer PIN, wipe sélectif. Compatible Outlook, Teams, Edge et apps tierces MSAL.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/android-oem-configuration-overview" target="_blank" rel="noopener" class="card and">
+        <div class="card-top"><div class="card-ic">🔩</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">OEMConfig — Configuration Constructeur</div><div class="card-desc">Configurer des paramètres spécifiques constructeurs (Zebra, Honeywell, Samsung Knox) via des schémas OEMConfig standardisés.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== MACOS ======== -->
+<div id="page-mac" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(162,170,173,.1);border-color:rgba(162,170,173,.3);color:var(--mac)"><div class="dot" style="background:var(--mac);box-shadow:0 0 8px var(--mac)"></div>Plateforme macOS</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#dce0e2,var(--mac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ressources macOS</h1>
+      <p class="hsub">Gérer les Mac d'entreprise avec Intune : enrôlement ABM/ADE, FileVault, profils de configuration, scripts Shell et Settings Catalog pour macOS.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(162,170,173,.1);color:var(--mac);border-color:rgba(162,170,173,.25)">ABM / ADE</span>
+        <span class="chip" style="background:rgba(162,170,173,.1);color:var(--mac);border-color:rgba(162,170,173,.25)">FILEVAULT</span>
+        <span class="chip" style="background:rgba(162,170,173,.1);color:var(--mac);border-color:rgba(162,170,173,.25)">SCRIPTS SHELL</span>
+        <span class="chip" style="background:rgba(162,170,173,.1);color:var(--mac);border-color:rgba(162,170,173,.25)">SETTINGS CATALOG</span>
+        <span class="chip" style="background:rgba(162,170,173,.1);color:var(--mac);border-color:rgba(162,170,173,.25)">GATEKEEPER</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Enrôlement macOS</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/macos-enroll" target="_blank" rel="noopener" class="card mac featured">
+        <div class="card-top"><div class="card-ic">🍎</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Enrôlement macOS via Intune — Vue d'ensemble</div><div class="card-desc">Méthodes d'enrôlement disponibles : ADE via Apple Business Manager, inscription utilisateur, et enrôlement manuel. Pré-requis certificats APNs et configuration ABM.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/device-enrollment-program-enroll-macos" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">🏭</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">ADE — Automated Device Enrollment</div><div class="card-desc">Enrôlement automatique via Apple Business Manager. Supervision obligatoire, Activation Lock, et expérience OOBE personnalisée.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/macos-install-company-app" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">🏪</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Company Portal macOS</div><div class="card-desc">Installation et configuration du Portail d'entreprise pour l'enrôlement utilisateur et la distribution d'applications en libre-service.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Configuration &amp; Sécurité macOS</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/encrypt-devices-filevault" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">🔒</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Chiffrement FileVault avec Intune</div><div class="card-desc">Activer et gérer FileVault 2 sur les Mac d'entreprise. Rotation automatique des clés de récupération et sauvegarde dans Intune.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/macos-shell-scripts" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">💻</div><div class="card-ty">Scripts · Officiel</div><div class="card-title">Scripts Shell macOS via Intune</div><div class="card-desc">Déployer des scripts bash/zsh sur les Mac gérés. Exécution en contexte root ou utilisateur, fréquence configurable et logs de résultat.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/settings-catalog-common-features" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">⚙️</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">Settings Catalog — Paramètres macOS</div><div class="card-desc">Configurer les préférences système macOS (Gatekeeper, Screen Time, Privacy Preferences Policy, Login Window) sans profils plist manuels.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/lob-apps-macos" target="_blank" rel="noopener" class="card mac">
+        <div class="card-top"><div class="card-ic">📦</div><div class="card-ty">Applications · Officiel</div><div class="card-title">Applications PKG/DMG via Intune</div><div class="card-desc">Déployer des applications macOS au format PKG et DMG. Règles de détection, prérequis, scripts pre/post-installation et dépendances.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== iOS ======== -->
+<div id="page-ios" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(0,122,255,.1);border-color:rgba(0,122,255,.35);color:var(--ios)"><div class="dot" style="background:var(--ios);box-shadow:0 0 8px var(--ios)"></div>Plateforme iOS / iPadOS</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#a0c4ff,var(--ios));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ressources iOS &amp; iPadOS</h1>
+      <p class="hsub">Gérer les iPhone et iPad d'entreprise avec Intune : supervision ADE, VPP, User Enrollment BYOD, politiques MAM et accès conditionnel mobile.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(0,122,255,.1);color:var(--ios);border-color:rgba(0,122,255,.3)">ADE / ABM</span>
+        <span class="chip" style="background:rgba(0,122,255,.1);color:var(--ios);border-color:rgba(0,122,255,.3)">VPP</span>
+        <span class="chip" style="background:rgba(0,122,255,.1);color:var(--ios);border-color:rgba(0,122,255,.3)">USER ENROLLMENT</span>
+        <span class="chip" style="background:rgba(0,122,255,.1);color:var(--ios);border-color:rgba(0,122,255,.3)">SUPERVISION</span>
+        <span class="chip" style="background:rgba(0,122,255,.1);color:var(--ios);border-color:rgba(0,122,255,.3)">MAM</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Enrôlement iOS / iPadOS</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/ios-enroll" target="_blank" rel="noopener" class="card ios featured">
+        <div class="card-top"><div class="card-ic">📱</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">Options d'enrôlement iOS/iPadOS — Choix de Méthode</div><div class="card-desc">Comparatif : ADE supervisé (corporate), User Enrollment (BYOD privacy-first), Enrôlement direct (web-based). Guide de décision selon propriété et niveau de contrôle requis.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/device-enrollment-program-enroll-ios" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">🏭</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">ADE — iOS Automatique via ABM</div><div class="card-desc">Supervision obligatoire et impossible à désactiver. Profil poussé lors du premier démarrage. Activation Lock géré par l'entreprise.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/ios-user-enrollment" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">👤</div><div class="card-ty">Enrôlement · Officiel</div><div class="card-title">User Enrollment — BYOD iOS</div><div class="card-desc">Volume APFS séparé pour les données pro. Apps et données personnelles invisibles depuis Intune. Wipe sélectif uniquement sur le volume pro.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Applications &amp; Protection iOS</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/vpp-apps-ios" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">🛒</div><div class="card-ty">Applications · Officiel</div><div class="card-title">Apple VPP — Licences en Volume</div><div class="card-desc">Acheter et déployer des apps iOS en volume via Apple Business Manager. Assignation per user ou per device, révocation automatique.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/apps/app-protection-policy" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">🛡️</div><div class="card-ty">MAM · Officiel</div><div class="card-title">APP — Protection sans MDM (MAM-WE)</div><div class="card-desc">Protéger les données dans Outlook, Teams, Edge sans enrôlement MDM. Idéal pour sous-traitants et BYOD où l'enrôlement est refusé.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/ios-device-features-settings" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">⚙️</div><div class="card-ty">Configuration · Officiel</div><div class="card-title">Fonctionnalités Appareils iOS/iPadOS</div><div class="card-desc">Paramètres spécifiques iOS : AirPrint, Single Sign-On Kerberos, Web Content Filter, Notifications par app et disposition d'écran d'accueil.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/ios-ipados-personal-device-security-configurations" target="_blank" rel="noopener" class="card ios">
+        <div class="card-top"><div class="card-ic">🔐</div><div class="card-ty">Sécurité · Officiel</div><div class="card-title">Security Configurations iOS/iPadOS</div><div class="card-desc">Configurations de sécurité en 3 niveaux (Basique, Amélioré, Haute Sécurité) pour BYOD et appareils supervisés selon les recommandations Microsoft.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== AUTOPILOT ======== -->
+<div id="page-aut" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(135,100,184,.1);border-color:rgba(135,100,184,.35);color:#c4a0ff"><div class="dot" style="background:var(--aut);box-shadow:0 0 8px var(--aut)"></div>Collection Autopilot</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#c4a0ff,var(--aut));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Windows Autopilot</h1>
+      <p class="hsub">Déploiement zéro-touch de Windows 10/11. Tous les scénarios, guides étape par étape et ressources communautaires sur Windows Autopilot.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(135,100,184,.1);color:#c4a0ff;border-color:rgba(135,100,184,.3)">USER-DRIVEN</span>
+        <span class="chip" style="background:rgba(135,100,184,.1);color:#c4a0ff;border-color:rgba(135,100,184,.3)">SELF-DEPLOYING</span>
+        <span class="chip" style="background:rgba(135,100,184,.1);color:#c4a0ff;border-color:rgba(135,100,184,.3)">WHITE GLOVE</span>
+        <span class="chip" style="background:rgba(135,100,184,.1);color:#c4a0ff;border-color:rgba(135,100,184,.3)">AUTOPILOT V2</span>
+        <span class="chip" style="background:rgba(135,100,184,.1);color:#c4a0ff;border-color:rgba(135,100,184,.3)">RESET</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Documentation Officielle Autopilot</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/windows-autopilot" target="_blank" rel="noopener" class="card aut featured">
+        <div class="card-top"><div class="card-ic">🚀</div><div class="card-ty">Officiel · Documentation</div><div class="card-title">Windows Autopilot — Centre de Documentation</div><div class="card-desc">Point d'entrée officiel Microsoft pour tout ce qui concerne Autopilot : scénarios, configuration requise, profils de déploiement, inscription des appareils et résolution de problèmes.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr/autopilot</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/requirements?tabs=software" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">📋</div><div class="card-ty">Officiel · Prérequis</div><div class="card-title">Configuration Requise Autopilot</div><div class="card-desc">Licences nécessaires, versions Windows supportées, URLs à autoriser en firewall et prérequis réseau pour un déploiement Autopilot réussi.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/add-devices" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">🖥️</div><div class="card-ty">Officiel · Enregistrement</div><div class="card-title">Enregistrer des Appareils dans Autopilot</div><div class="card-desc">3 méthodes : via revendeur OEM (recommandé), via script PowerShell (hash matériel), via CSV upload dans le portail Intune.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/profiles" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">🎯</div><div class="card-ty">Officiel · Configuration</div><div class="card-title">Profils de Déploiement Autopilot</div><div class="card-desc">Configurer les profils User-Driven Hybrid AADJ, Self-Deploying, Pre-Provisioning et Existing Devices. Paramètres OOBE et ESP associés.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/windows-autopilot-reset" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">🔁</div><div class="card-ty">Officiel · Reset</div><div class="card-title">Autopilot Reset</div><div class="card-desc">Réinitialiser un appareil pour le réaffecter sans retour en usine. Reset local ou à distance depuis Intune, préserve l'enregistrement Autopilot.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/tutorial/autopilot-device-preparation/azure-ad-join-workflow" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">✨</div><div class="card-ty">Officiel · Autopilot v2</div><div class="card-title">Autopilot Device Preparation (v2)</div><div class="card-desc">Nouvelle génération Autopilot : déploiement plus rapide, moins de restrictions réseau, meilleure gestion des dépendances d'applications et rapport amélioré.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+
+    <div class="sec-title">// Résolution de Problèmes Autopilot</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/autopilot/troubleshooting-faq" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">🔍</div><div class="card-ty">Support · Officiel</div><div class="card-title">FAQ Résolution Problèmes Autopilot</div><div class="card-desc">Guide de résolution des erreurs courantes : code 0x800705b4, problèmes ESP, 80180014, enregistrement hash matériel et timeouts.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/troubleshoot-windows-enrollment-errors" target="_blank" rel="noopener" class="card aut">
+        <div class="card-top"><div class="card-ic">🐛</div><div class="card-ty">Support · Officiel</div><div class="card-title">Erreurs d'Enrôlement Windows</div><div class="card-desc">Référence des codes d'erreur d'enrôlement Intune pour Windows. Causes possibles et étapes de résolution pour chaque code d'erreur.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== CONFORMITÉ ======== -->
+<div id="page-comp" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(231,72,86,.1);border-color:rgba(231,72,86,.35);color:var(--comp)"><div class="dot" style="background:var(--comp);box-shadow:0 0 8px var(--comp)"></div>Collection Conformité</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#ff8a94,var(--comp));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Politiques de Conformité</h1>
+      <p class="hsub">Définir, appliquer et monitorer la conformité de votre parc d'appareils. Intégration avec Conditional Access pour bloquer les appareils non conformes.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(231,72,86,.1);color:var(--comp);border-color:rgba(231,72,86,.3)">COMPLIANCE POLICIES</span>
+        <span class="chip" style="background:rgba(231,72,86,.1);color:var(--comp);border-color:rgba(231,72,86,.3)">GRACE PERIOD</span>
+        <span class="chip" style="background:rgba(231,72,86,.1);color:var(--comp);border-color:rgba(231,72,86,.3)">ACTIONS NON-CONFORMITÉ</span>
+        <span class="chip" style="background:rgba(231,72,86,.1);color:var(--comp);border-color:rgba(231,72,86,.3)">CUSTOM COMPLIANCE</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Documentation Conformité Officielle</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/device-compliance-get-started" target="_blank" rel="noopener" class="card comp featured">
+        <div class="card-top"><div class="card-ic">✅</div><div class="card-ty">Officiel · Conformité</div><div class="card-title">Politiques de Conformité — Introduction</div><div class="card-desc">Comprendre le fonctionnement des politiques de conformité : cycle d'évaluation, période de grâce, état In Grace Period, actions sur non-conformité (email, remotely lock, retire).</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/compliance-policy-create-windows" target="_blank" rel="noopener" class="card comp">
+        <div class="card-top"><div class="card-ic">🪟</div><div class="card-ty">Conformité · Windows</div><div class="card-title">Paramètres de Conformité Windows</div><div class="card-desc">Référence complète : BitLocker, version OS min/max, Secure Boot, Defender, TPM, mot de passe, code PIN et CodeIntegrity.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/compliance-policy-create-android" target="_blank" rel="noopener" class="card comp">
+        <div class="card-top"><div class="card-ic">🤖</div><div class="card-ty">Conformité · Android</div><div class="card-title">Paramètres de Conformité Android</div><div class="card-desc">Détection jailbreak, version OS, Google Play Protect, niveau de patch de sécurité, SafetyNet Attestation et chiffrement appareil.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/compliance-policy-create-ios" target="_blank" rel="noopener" class="card comp">
+        <div class="card-top"><div class="card-ic">📱</div><div class="card-ty">Conformité · iOS</div><div class="card-title">Paramètres de Conformité iOS/iPadOS</div><div class="card-desc">Jailbreak, version iOS min, restriction email, chiffrement, mot de passe complexité et intégration Mobile Threat Defense (MTD).</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/compliance-use-custom-settings" target="_blank" rel="noopener" class="card comp">
+        <div class="card-top"><div class="card-ic">🔧</div><div class="card-ty">Conformité · Custom</div><div class="card-title">Conformité Personnalisée (Scripts)</div><div class="card-desc">Créer des règles de conformité basées sur des scripts PowerShell ou Shell. Retourner du JSON et définir vos propres critères de conformité métier.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/protect/actions-for-noncompliance" target="_blank" rel="noopener" class="card comp">
+        <div class="card-top"><div class="card-ic">⚡</div><div class="card-ty">Conformité · Actions</div><div class="card-title">Actions sur Non-Conformité</div><div class="card-desc">Configurer des actions automatiques : envoyer un email, envoyer une notification push, verrouiller à distance ou mettre en retraite après une période définie.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== ACCÈS CONDITIONNEL ======== -->
+<div id="page-ca" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.35);color:var(--ca)"><div class="dot" style="background:var(--ca);box-shadow:0 0 8px var(--ca)"></div>Collection Accès Conditionnel</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#a0f4ff,var(--ca));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Accès Conditionnel Entra ID</h1>
+      <p class="hsub">Sécuriser l'accès aux ressources Microsoft 365 en combinant signaux d'identité, d'appareil et de réseau. Pilier du modèle Zero Trust.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(0,212,255,.1);color:var(--ca);border-color:rgba(0,212,255,.3)">ZERO TRUST</span>
+        <span class="chip" style="background:rgba(0,212,255,.1);color:var(--ca);border-color:rgba(0,212,255,.3)">MFA</span>
+        <span class="chip" style="background:rgba(0,212,255,.1);color:var(--ca);border-color:rgba(0,212,255,.3)">NAMED LOCATIONS</span>
+        <span class="chip" style="background:rgba(0,212,255,.1);color:var(--ca);border-color:rgba(0,212,255,.3)">REPORT-ONLY</span>
+        <span class="chip" style="background:rgba(0,212,255,.1);color:var(--ca);border-color:rgba(0,212,255,.3)">BREAK GLASS</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Documentation Officielle — Accès Conditionnel</div>
+    <div class="cards">
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/overview" target="_blank" rel="noopener" class="card ca featured">
+        <div class="card-top"><div class="card-ic">🔐</div><div class="card-ty">Officiel · Entra ID</div><div class="card-title">Accès Conditionnel — Vue d'Ensemble</div><div class="card-desc">Introduction au modèle If-Then de l'accès conditionnel. Signaux analysés (identité, appareil, réseau, app), décisions (Allow, Block, MFA) et contrôles d'accès disponibles.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr/entra</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/howto-conditional-access-policy-compliant-device" target="_blank" rel="noopener" class="card ca">
+        <div class="card-top"><div class="card-ic">📱</div><div class="card-ty">CA · Politique</div><div class="card-title">Exiger un Appareil Conforme Intune</div><div class="card-desc">Créer une politique CA qui bloque l'accès si l'appareil n'est pas marqué "conforme" par Intune. Prérequis, exclusions break-glass et mode Report-Only.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/policy-all-users-mfa" target="_blank" rel="noopener" class="card ca">
+        <div class="card-top"><div class="card-ic">🔢</div><div class="card-ty">CA · Politique</div><div class="card-title">Imposer le MFA pour Tous les Utilisateurs</div><div class="card-desc">Politique fondamentale Zero Trust. Configuration MFA obligatoire, exclusions, méthodes d'authentification (Authenticator, FIDO2, passkeys).</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/howto-conditional-access-policy-location" target="_blank" rel="noopener" class="card ca">
+        <div class="card-top"><div class="card-ic">🌍</div><div class="card-ty">CA · Localisation</div><div class="card-title">Politiques Basées sur la Localisation</div><div class="card-desc">Bloquer les connexions depuis des pays non autorisés. Créer des Named Locations (IP, pays) et les utiliser comme signal dans les politiques CA.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/policy-all-users-sign-in-risk" target="_blank" rel="noopener" class="card ca">
+        <div class="card-top"><div class="card-ic">⚠️</div><div class="card-ty">CA · Identity Protection</div><div class="card-title">Risque de Connexion — Identity Protection</div><div class="card-desc">Politique basée sur le score de risque de connexion Entra (faible, moyen, élevé). Blocage ou MFA renforcé selon le niveau de risque détecté.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/plan-conditional-access" target="_blank" rel="noopener" class="card ca">
+        <div class="card-top"><div class="card-ic">📐</div><div class="card-ty">CA · Planification</div><div class="card-title">Planifier un Déploiement CA</div><div class="card-desc">Guide de planification complet : matrice de politiques, ordre d'application, comptes break-glass, mode audit (Report-Only) et test avant production.</div></div>
+        <div class="card-ft"><span class="card-src">learn.microsoft.com/fr-fr</span><span class="card-arr">→</span></div>
+      </a>
+    </div>
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<!-- ======== RESSOURCES ======== -->
+<div id="page-res" class="page">
+  <div class="wrap">
+    <button class="back" onclick="goTo('hub')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour Accueil</button>
+    <div class="hero">
+      <div class="htag" style="background:rgba(255,159,0,.1);border-color:rgba(255,159,0,.35);color:var(--res)"><div class="dot" style="background:var(--res);box-shadow:0 0 8px var(--res)"></div>Ressources Communautaires</div>
+      <h1 class="htitle" style="background:linear-gradient(135deg,#fff,#ffd47a,var(--res));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Communauté &amp; Outils</h1>
+      <p class="hsub">Blogs experts, outils, formations et événements de la communauté Microsoft Intune mondiale. Curé par des MVP et professionnels du Modern Workplace.</p>
+      <div class="hchips">
+        <span class="chip" style="background:rgba(255,159,0,.1);color:var(--res);border-color:rgba(255,159,0,.3)">BLOGS</span>
+        <span class="chip" style="background:rgba(255,159,0,.1);color:var(--res);border-color:rgba(255,159,0,.3)">OUTILS</span>
+        <span class="chip" style="background:rgba(255,159,0,.1);color:var(--res);border-color:rgba(255,159,0,.3)">FORMATIONS</span>
+        <span class="chip" style="background:rgba(255,159,0,.1);color:var(--res);border-color:rgba(255,159,0,.3)">EVENTS</span>
+        <span class="chip" style="background:rgba(255,159,0,.1);color:var(--res);border-color:rgba(255,159,0,.3)">NEWSLETTERS</span>
+      </div>
+    </div>
+
+    <div class="sec-title">// Outils &amp; Portails Essentiels</div>
+    <div class="tool-grid">
+      <a href="https://endpoint.microsoft.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🏢</div><div><div class="tool-name">Centre d'Admin Intune</div><div class="tool-desc">endpoint.microsoft.com</div></div></a>
+      <a href="https://entra.microsoft.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🆔</div><div><div class="tool-name">Portail Entra ID</div><div class="tool-desc">entra.microsoft.com</div></div></a>
+      <a href="https://developer.microsoft.com/en-us/graph/graph-explorer" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🔭</div><div><div class="tool-name">Graph Explorer</div><div class="tool-desc">Tester les API Graph</div></div></a>
+      <a href="https://m365maps.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🗺️</div><div><div class="tool-name">M365Maps.com</div><div class="tool-desc">Visualisation licences M365</div></div></a>
+      <a href="https://github.com/microsoft/Microsoft-Intune-PowerShell-Samples" target="_blank" rel="noopener" class="tool"><div class="tool-ic">💻</div><div><div class="tool-name">Intune PowerShell Samples</div><div class="tool-desc">GitHub Microsoft officiel</div></div></a>
+      <a href="https://www.mdinspector.com/" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🔍</div><div><div class="tool-name">MDInspector</div><div class="tool-desc">Diagnostic MDM &amp; politiques</div></div></a>
+      <a href="https://intunereportingfunctions.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">📊</div><div><div class="tool-name">Intune Reporting Functions</div><div class="tool-desc">Rapports avancés PowerShell</div></div></a>
+      <a href="https://www.intunewin.com" target="_blank" rel="noopener" class="tool"><div class="tool-ic">📦</div><div><div class="tool-name">IntuneWin Tool</div><div class="tool-desc">Packaging .intunewin apps</div></div></a>
+      <a href="https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/whats-new" target="_blank" rel="noopener" class="tool"><div class="tool-ic">🆕</div><div><div class="tool-name">Nouveautés Intune</div><div class="tool-desc">Changelog mensuel Microsoft</div></div></a>
+      <a href="https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyMenuBlade/Compliance" target="_blank" rel="noopener" class="tool"><div class="tool-ic">⚖️</div><div><div class="tool-name">Azure Policy Compliance</div><div class="tool-desc">Conformité Azure natif</div></div></a>
+    </div>
+
+    <div class="divider"></div>
+    <div class="sec-title">// Blogs &amp; Experts Communautaires</div>
+    <div class="blog-grid">
+      <a href="https://www.petervanderwoude.nl/" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🇳🇱</div><div><div class="blog-who">Peter van der Woude</div><div class="blog-when">MVP Microsoft Intune</div></div></div>
+        <div class="blog-title">Blog Intune & Co-Management</div>
+        <div class="blog-desc">L'un des blogs les plus prolifiques sur Intune. Articles techniques détaillés sur les nouvelles fonctionnalités, Configuration Manager et PowerShell.</div>
+        <div class="blog-tags"><span class="blog-tag">INTUNE</span><span class="blog-tag">CONFIGMGR</span><span class="blog-tag">POWERSHELL</span></div>
+      </a>
+      <a href="https://oliverkieselbach.com/" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🇩🇪</div><div><div class="blog-who">Oliver Kieselbach</div><div class="blog-when">MVP Microsoft Intune</div></div></div>
+        <div class="blog-title">Modern Workplace Blog</div>
+        <div class="blog-desc">Articles de fond sur Autopilot, sécurité Windows et Modern Device Management. Spécialiste des mécanismes internes d'Intune.</div>
+        <div class="blog-tags"><span class="blog-tag">AUTOPILOT</span><span class="blog-tag">SÉCURITÉ</span><span class="blog-tag">INTUNE INTERNE</span></div>
+      </a>
+      <a href="https://www.nielskok.tech/" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🇳🇱</div><div><div class="blog-who">Niels Kok</div><div class="blog-when">Microsoft MVP</div></div></div>
+        <div class="blog-title">Intune & Azure AD Blog</div>
+        <div class="blog-desc">Guides pratiques sur Intune, Entra ID, LAPS et accès conditionnel. Tutoriels pas à pas avec captures d'écran.</div>
+        <div class="blog-tags"><span class="blog-tag">ENTRA ID</span><span class="blog-tag">LAPS</span><span class="blog-tag">CA</span></div>
+      </a>
+      <a href="https://techcommunity.microsoft.com/category/intune" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🏢</div><div><div class="blog-who">Microsoft Tech Community</div><div class="blog-when">Forum officiel Microsoft</div></div></div>
+        <div class="blog-title">Tech Community — Intune</div>
+        <div class="blog-desc">Forum officiel Microsoft pour les questions Intune. Équipe produit présente, annonces et discussions avec la communauté mondiale.</div>
+        <div class="blog-tags"><span class="blog-tag">OFFICIEL</span><span class="blog-tag">FORUM</span><span class="blog-tag">MVP</span></div>
+      </a>
+      <a href="https://intuneirl.com/" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🇮🇪</div><div><div class="blog-who">Intune IRL</div><div class="blog-when">Communauté</div></div></div>
+        <div class="blog-title">Intune in Real Life</div>
+        <div class="blog-desc">Scénarios réels et cas pratiques Intune. Scripts, résolution de problèmes et retours d'expérience de déploiements entreprise.</div>
+        <div class="blog-tags"><span class="blog-tag">CAS PRATIQUES</span><span class="blog-tag">SCRIPTS</span></div>
+      </a>
+      <a href="https://www.anoopcnair.com/" target="_blank" rel="noopener" class="blog-card">
+        <div class="blog-meta"><div class="blog-av">🇮🇳</div><div><div class="blog-who">Anoop C Nair</div><div class="blog-when">Microsoft MVP</div></div></div>
+        <div class="blog-title">HTMD Blog — Intune & SCCM</div>
+        <div class="blog-desc">Blog très actif couvrant Intune, Configuration Manager et Azure. Guides visuels détaillés et tutoriels vidéo pour chaque fonctionnalité.</div>
+        <div class="blog-tags"><span class="blog-tag">TUTORIELS</span><span class="blog-tag">SCCM</span><span class="blog-tag">AZURE</span></div>
+      </a>
+    </div>
+
+    <div class="divider"></div>
+    <div class="sec-title">// Formations &amp; Certifications</div>
+    <div class="train-grid">
+      <a href="https://learn.microsoft.com/fr-fr/training/paths/endpoint-manager-fundamentals/" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,var(--ms),var(--ca))"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:var(--msl)">MICROSOFT LEARN</div>
+          <div class="train-title">Fondamentaux Microsoft Intune</div>
+          <div class="train-meta">Parcours d'apprentissage officiel • Gratuit • FR</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(0,212,255,.1);color:var(--ca);border:1px solid rgba(0,212,255,.25)">DÉBUTANT</span><span style="font-size:11px;color:var(--dim)">Microsoft Official</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/credentials/certifications/exams/md-102/" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,var(--ms),#0050a0)"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:var(--msl)">CERTIFICATION</div>
+          <div class="train-title">MD-102 : Endpoint Administrator</div>
+          <div class="train-meta">Examen certification Microsoft officiel</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(0,120,212,.1);color:var(--msl);border:1px solid rgba(0,120,212,.25)">INTERMÉDIAIRE</span><span style="font-size:11px;color:var(--dim)">Certifiant</span></div>
+      </a>
+      <a href="https://learn.microsoft.com/fr-fr/training/modules/protect-corporate-apps-intune/" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,var(--comp),#8b0000)"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:#ff8a94">MICROSOFT LEARN</div>
+          <div class="train-title">Protéger les Apps d'Entreprise avec Intune</div>
+          <div class="train-meta">Module MAM, APP policies et conformité</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(231,72,86,.1);color:var(--comp);border:1px solid rgba(231,72,86,.25)">INTERMÉDIAIRE</span><span style="font-size:11px;color:var(--dim)">Gratuit</span></div>
+      </a>
+      <a href="https://www.udemy.com/courses/search/?src=ukw&q=microsoft+intune" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,#a435f0,#6c10c4)"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:#c47aff">UDEMY</div>
+          <div class="train-title">Cours Intune — Plusieurs Formateurs</div>
+          <div class="train-meta">Catalogue de cours vidéo en ligne • Payant</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(164,53,240,.1);color:#c47aff;border:1px solid rgba(164,53,240,.25)">TOUS NIVEAUX</span><span style="font-size:11px;color:var(--dim)">Communauté</span></div>
+      </a>
+      <a href="https://www.youtube.com/@MSIntune" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,#ff0000,#cc0000)"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:#ff6b6b">YOUTUBE</div>
+          <div class="train-title">Microsoft Intune — Chaîne Officielle</div>
+          <div class="train-meta">Webinars, démonstrations et annonces de fonctionnalités</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(255,0,0,.08);color:#ff6b6b;border:1px solid rgba(255,0,0,.2)">OFFICIEL</span><span style="font-size:11px;color:var(--dim)">Gratuit</span></div>
+      </a>
+      <a href="https://workplaceninja.com/" target="_blank" rel="noopener" class="train">
+        <div class="train-top" style="background:linear-gradient(90deg,var(--aut),#6a45a0)"></div>
+        <div class="train-body">
+          <div class="train-src" style="color:#c4a0ff">WORKPLACE NINJA</div>
+          <div class="train-title">Workplace Ninja Summit</div>
+          <div class="train-meta">Événement communautaire annuel Microsoft Intune</div>
+        </div>
+        <div class="train-ft"><span class="train-lv" style="background:rgba(135,100,184,.1);color:var(--aut);border:1px solid rgba(135,100,184,.25)">ÉVÉNEMENT</span><span style="font-size:11px;color:var(--dim)">Community</span></div>
+      </a>
+    </div>
+
+    <div style="margin-top:40px;text-align:center"><button class="back" onclick="goTo('hub')" style="display:inline-flex">← Retour Accueil</button></div>
+  </div>
+</div>
+
+<script>
+// ---- PAGE ROUTING ----
+const pages = ['hub','win','and','mac','ios','aut','comp','ca','res'];
+function goTo(id){
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.remove('active');
+    const n=document.getElementById('nav-'+p);
+    if(n)n.classList.remove('active');
+  });
+  document.getElementById('page-'+id).classList.add('active');
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('search-panel').classList.remove('show');
+  document.getElementById('search-panel').innerHTML='';
+}
+
+// ---- SEARCH DATA ----
+const allLinks=[
+  // Windows
+  {ic:'🚀',plat:'Windows',platId:'win',title:'Windows Autopilot — Guide Complet',desc:'Déploiement zéro-touch Windows 10/11',url:'https://learn.microsoft.com/fr-fr/autopilot/windows-autopilot',tags:['autopilot','windows','deploiement','zero-touch']},
+  {ic:'⚙️',plat:'Windows',platId:'win',title:'Settings Catalog',desc:'15 000+ paramètres Windows disponibles',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/configuration/settings-catalog',tags:['settings catalog','configuration','admx','gpo','windows']},
+  {ic:'🔒',plat:'Windows',platId:'win',title:'Chiffrement BitLocker via Intune',desc:'Activer BitLocker silencieusement, sauvegarder clés Entra',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/encrypt-devices',tags:['bitlocker','chiffrement','sécurité','windows']},
+  {ic:'🛡️',plat:'Windows',platId:'win',title:'Defender for Endpoint + Intune',desc:'Intégration MDE, règles ASR, onboarding automatique',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/advanced-threat-protection',tags:['defender','sécurité','mde','asr','windows']},
+  {ic:'🔑',plat:'Windows',platId:'win',title:'Windows LAPS',desc:'Gestion automatique mots de passe admin locaux',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/windows-laps-overview',tags:['laps','mot de passe','admin','sécurité','windows']},
+  {ic:'🔄',plat:'Windows',platId:'win',title:'Update Rings Windows',desc:'Anneaux de mise à jour progressifs',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/windows-update-for-business-configure',tags:['update rings','mises a jour','windows update','wufb']},
+  {ic:'🤖',plat:'Windows',platId:'win',title:'Windows Autopatch',desc:'Automatisation complète des mises à jour',url:'https://learn.microsoft.com/fr-fr/windows/deployment/windows-autopatch/overview/windows-autopatch-overview',tags:['autopatch','mises a jour','automatisation','windows']},
+  {ic:'🔧',plat:'Windows',platId:'win',title:'Remédiation Proactive',desc:'Scripts détection + correction automatique',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/fundamentals/remediations',tags:['remediation','proactive','scripts','powershell','windows']},
+  {ic:'📐',plat:'Windows',platId:'win',title:'Security Baselines',desc:'Paramètres de sécurité recommandés Microsoft',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/security-baselines',tags:['security baseline','sécurité','baseline','windows']},
+  // Android
+  {ic:'🤖',plat:'Android',platId:'and',title:'Vue d\'ensemble Android Enterprise',desc:'Work Profile, Fully Managed, Dedicated, COPE',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-enroll',tags:['android','enterprise','byod','work profile','fully managed']},
+  {ic:'💼',plat:'Android',platId:'and',title:'Work Profile BYOD Android',desc:'Profil pro isolé sur appareil personnel',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-work-profile-enroll',tags:['android','work profile','byod','personnel']},
+  {ic:'📺',plat:'Android',platId:'and',title:'Dedicated Devices Kiosque',desc:'Mode kiosque mono et multi-application',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/android-kiosk-enroll',tags:['android','kiosque','dedicated','borne']},
+  {ic:'📦',plat:'Android',platId:'and',title:'Google Play Managed',desc:'Apps déployées silencieusement',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/apps/apps-add-android-for-work',tags:['android','play','applications','google','store']},
+  // macOS
+  {ic:'🔒',plat:'macOS',platId:'mac',title:'Chiffrement FileVault',desc:'Gérer FileVault 2, rotation des clés',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/encrypt-devices-filevault',tags:['filevault','chiffrement','macos','clés']},
+  {ic:'💻',plat:'macOS',platId:'mac',title:'Scripts Shell macOS',desc:'Bash/zsh via Intune sur Mac',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/apps/macos-shell-scripts',tags:['macos','scripts','shell','bash']},
+  {ic:'🏭',plat:'macOS',platId:'mac',title:'ADE macOS — Apple Business Manager',desc:'Enrôlement automatique supervisé',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/device-enrollment-program-enroll-macos',tags:['macos','ade','abm','apple','enrôlement']},
+  // iOS
+  {ic:'📱',plat:'iOS / iPadOS',platId:'ios',title:'Enrôlement iOS — Vue d\'ensemble',desc:'ADE, User Enrollment, enrôlement direct',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/enrollment/ios-enroll',tags:['ios','ipad','enrôlement','ade']},
+  {ic:'🛒',plat:'iOS / iPadOS',platId:'ios',title:'Apple VPP — Licences en Volume',desc:'Apps iOS déployées via ABM',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/apps/vpp-apps-ios',tags:['ios','vpp','apple','licences','applications']},
+  {ic:'🛡️',plat:'iOS / iPadOS',platId:'ios',title:'MAM sans MDM iOS',desc:'Protection apps sans enrôlement',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/apps/app-protection-policy',tags:['ios','mam','protection','byod','outlook','teams']},
+  // Autopilot
+  {ic:'🚀',plat:'Autopilot',platId:'aut',title:'Centre Documentation Autopilot',desc:'Point d\'entrée officiel Microsoft',url:'https://learn.microsoft.com/fr-fr/autopilot/windows-autopilot',tags:['autopilot','documentation','windows']},
+  {ic:'🎯',plat:'Autopilot',platId:'aut',title:'Profils de Déploiement Autopilot',desc:'User-Driven, Self-Deploying, Pre-Provisioning',url:'https://learn.microsoft.com/fr-fr/autopilot/profiles',tags:['autopilot','profils','user-driven','self-deploying','white glove']},
+  {ic:'✨',plat:'Autopilot',platId:'aut',title:'Autopilot Device Preparation v2',desc:'Nouvelle génération Autopilot plus rapide',url:'https://learn.microsoft.com/fr-fr/autopilot/tutorial/autopilot-device-preparation/azure-ad-join-workflow',tags:['autopilot','v2','device preparation','nouveau']},
+  // Conformité
+  {ic:'✅',plat:'Conformité',platId:'comp',title:'Politiques de Conformité — Introduction',desc:'Cycle évaluation, période de grâce, actions',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/device-compliance-get-started',tags:['conformité','compliance','policies','grace period']},
+  {ic:'⚡',plat:'Conformité',platId:'comp',title:'Actions sur Non-Conformité',desc:'Email, verrouillage, mise en retraite auto',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/actions-for-noncompliance',tags:['conformité','actions','non-conformité','email']},
+  {ic:'🔧',plat:'Conformité',platId:'comp',title:'Conformité Personnalisée',desc:'Scripts PowerShell retournant du JSON',url:'https://learn.microsoft.com/fr-fr/intune/intune-service/protect/compliance-use-custom-settings',tags:['conformité','custom','scripts','powershell']},
+  // Accès Conditionnel
+  {ic:'🔐',plat:'Accès Conditionnel',platId:'ca',title:'Accès Conditionnel — Vue d\'ensemble',desc:'Modèle If-Then, signaux, décisions',url:'https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/overview',tags:['accès conditionnel','conditional access','zero trust','entra']},
+  {ic:'📱',plat:'Accès Conditionnel',platId:'ca',title:'Exiger Appareil Conforme Intune',desc:'Politique CA bloquant les non-conformes',url:'https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/howto-conditional-access-policy-compliant-device',tags:['accès conditionnel','conforme','intune','politique']},
+  {ic:'🔢',plat:'Accès Conditionnel',platId:'ca',title:'MFA pour Tous les Utilisateurs',desc:'Politique fondamentale Zero Trust',url:'https://learn.microsoft.com/fr-fr/entra/identity/conditional-access/policy-all-users-mfa',tags:['mfa','accès conditionnel','zero trust','authentification']},
+  // Ressources
+  {ic:'🏢',plat:'Ressources',platId:'res',title:'Centre d\'Administration Intune',desc:'endpoint.microsoft.com',url:'https://endpoint.microsoft.com',tags:['portail','admin','intune','centre']},
+  {ic:'🔭',plat:'Ressources',platId:'res',title:'Graph Explorer',desc:'Tester les API Microsoft Graph',url:'https://developer.microsoft.com/en-us/graph/graph-explorer',tags:['graph','api','explorer','powershell']},
+  {ic:'💬',plat:'Ressources',platId:'res',title:'Tech Community Intune',desc:'Forum officiel Microsoft',url:'https://techcommunity.microsoft.com/category/intune',tags:['forum','communauté','microsoft','questions']},
+];
+
+function liveSearch(q){
+  const panel=document.getElementById('search-panel');
+  const hubInput=document.getElementById('hubSearch');
+  const navInput=document.getElementById('navSearch');
+  // sync both inputs
+  if(document.activeElement===hubInput&&navInput)navInput.value=q;
+  if(document.activeElement===navInput&&hubInput)hubInput.value=q;
+  if(!q||q.length<2){panel.classList.remove('show');panel.innerHTML='';return;}
+  const kw=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const results=allLinks.filter(l=>{
+    const hay=(l.title+' '+l.desc+' '+l.tags.join(' ')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return hay.includes(kw);
+  }).slice(0,8);
+  if(!results.length){panel.innerHTML='<div class="sr-head">// Résultats de Recherche</div><div class="no-results"><span class="no-results-ic">🔍</span><div>Aucune ressource trouvée pour "'+q+'"</div><div style="font-size:12px;color:var(--dim2);margin-top:6px">Essayez des termes différents : autopilot, bitlocker, conformité, mam...</div></div>';panel.classList.add('show');return;}
+  panel.innerHTML='<div class="sr-head">// '+results.length+' résultat'+(results.length>1?'s':'')+' pour "'+q+'"</div>'+results.map(r=>`<a href="${r.url}" target="_blank" rel="noopener" class="sr-item"><div class="sr-ic">${r.ic}</div><div><div class="sr-plat" style="color:var(--msl)">${r.plat}</div><div class="sr-t">${r.title}</div><div class="sr-d">${r.desc}</div></div></a>`).join('');
+  panel.classList.add('show');
+}
+
+function doSearch(){
+  const q=document.getElementById('hubSearch').value||document.getElementById('navSearch').value;
+  liveSearch(q);
+}
+
+// Click outside to close search
+document.addEventListener('click',e=>{
+  const panel=document.getElementById('search-panel');
+  const hs=document.getElementById('hubSearch');
+  const ns=document.getElementById('navSearch');
+  if(panel&&!panel.contains(e.target)&&e.target!==hs&&e.target!==ns){panel.classList.remove('show');}
+});
+</script>
+</body>
+</html>
